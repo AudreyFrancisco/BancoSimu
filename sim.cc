@@ -8,6 +8,7 @@
 
 #include "construction.hh"
 #include "physics.hh"
+#include "action.hh"
 
 int main(int argc, char** argv)
 {
@@ -15,6 +16,7 @@ int main(int argc, char** argv)
 
 	runManager->SetUserInitialization(new BancoConstruction());
 	runManager->SetUserInitialization(new MyPhysicsList());
+	runManager->SetUserInitialization(new MyActionInitialization());
 	runManager->Initialize();
 
 	G4UIExecutive *ui = new G4UIExecutive(argc, argv);
@@ -27,6 +29,8 @@ int main(int argc, char** argv)
 	UImanager->ApplyCommand("/vis/open OGL");
 	UImanager->ApplyCommand("/vis/viewer/set/viewpointVector 1 1 1");
 	UImanager->ApplyCommand("/vis/drawVolume");
+    UImanager->ApplyCommand("/vis/viewer/set/autoRefresh true");
+	UImanager->ApplyCommand("/vis/scene/add/trajectories smooth");
 
 	ui->SessionStart();
 
